@@ -1,0 +1,38 @@
+<section class="my-4" *ngIf="products.length > 0">
+
+  <div class="row g-4">
+
+    <div class="col-md-2" *ngFor="let item of products">
+
+      <div class="product">
+
+        <i (click)="addFav(item._id)" class="fa-regular fa-heart header"></i>
+
+        <div class="p-2 cursor-pointer" [routerLink]="['/details' , item._id]">
+
+          <img [src]="item.imageCover" class="w-100" [alt]="item.title">
+          <h3 class="h6">{{item.category.name | buy}}</h3>
+          <h4 class="h6">{{item.title | termtext: 6}}</h4>
+
+          <div class="d-flex align-items-center justify-content-between">
+            <span>{{item.price | currency: "ERU"}}</span>
+
+            <div>
+
+              <i class="fas fa-star rating-color"></i>
+
+              <span class="text-muted">{{item.ratingsAverage}}</span>
+
+            </div>
+          </div>
+
+        </div>
+
+        <button (click)="addCart(item._id)" class="btn-main w-100">Add Product</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

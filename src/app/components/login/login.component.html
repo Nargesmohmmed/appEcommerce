@@ -1,0 +1,75 @@
+<section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+  <h1>Login Now</h1>
+  <form [formGroup]="loginFrom" (ngSubmit)="handleform()">
+
+    <div class="mb-2">
+      <label for="email">email :</label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="form-control"
+      />
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          loginFrom.get('email')?.touched &&
+          loginFrom.get('email')?.errors
+        "
+      >
+        <p *ngIf="loginFrom.get('email')?.getError('required')">
+          email Is required
+        </p>
+
+        <p *ngIf="loginFrom.get('email')?.getError('email')">
+          email Minvalid Format
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <label for="password">password :</label>
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        class="form-control"
+      />
+
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          loginFrom.get('password')?.touched &&
+          loginFrom.get('password')?.errors
+        "
+      >
+        <p *ngIf="loginFrom.get('password')?.getError('required')">
+          password Is required
+        </p>
+
+        <p *ngIf="loginFrom.get('password')?.getError('pattern')">
+          must be at least 6 chars
+        </p>
+      </div>
+
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+
+  <!-- [disabled]="loginFrom.valid" -->
+    <button  type="submit" class="btn-main ms-auto d-block">
+      Login
+      <span><i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i></span>
+    </button>
+
+    <a routerLink="/forgotpassword" class="link-primary">Forgot Password</a>
+
+    </div>
+
+  </form>
+
+  <div *ngIf="errMsg" class="alert alert-danger">{{errMsg}}</div>
+</section>
+
